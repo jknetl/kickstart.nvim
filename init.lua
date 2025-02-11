@@ -998,6 +998,7 @@ require('lazy').setup({
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
+  'almo7aya/openingh.nvim',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
