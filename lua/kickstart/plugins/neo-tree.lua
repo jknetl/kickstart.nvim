@@ -20,6 +20,10 @@ return {
           ['\\'] = 'close_window',
         },
       },
+      follow_current_file = {
+        enabled = true,
+        leave_dirs_open = true, -- This will keep directories open as you navigate
+      },
     },
   },
 }
