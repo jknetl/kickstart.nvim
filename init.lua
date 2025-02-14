@@ -195,6 +195,25 @@ end)
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+--
+
+-- comment with <leader>c (uses built-in commenting feature)
+vim.api.nvim_set_keymap('n', '<leader>c', 'gc', { noremap = false })
+vim.api.nvim_set_keymap('x', '<leader>c', 'gc', { noremap = false })
+
+-- Terraform LSP config
+vim.cmd [[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]]
+vim.cmd [[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]]
+vim.cmd [[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]]
+vim.cmd [[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]]
+vim.cmd [[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]]
+-- keymap("n", "<leader>ti", ":!terraform init<CR>", opts)
+-- keymap("n", "<leader>tv", ":!terraform validate<CR>", opts)
+-- keymap("n", "<leader>tp", ":!terraform plan<CR>", opts)
+-- keymap("n", "<leader>ta", ":!terraform apply<CR>", opts)
+-- following two might require vim-terraform plugin installed!
+-- vim.cmd [[let g:terraform_fmt_on_save=1]]
+-- vim.cmd [[let g:terraform_align=1]]
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -705,6 +724,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'terraform-ls', -- Used for Terraform LSP
+        'tflint', -- Used for Terraform linting
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
