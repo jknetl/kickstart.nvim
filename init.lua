@@ -1060,6 +1060,12 @@ require('lazy').setup({
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
+  {
+    'aserowy/tmux.nvim',
+    config = function()
+      return require('tmux').setup()
+    end,
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
