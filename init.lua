@@ -295,6 +295,8 @@ require('lazy').setup({
       },
     },
   },
+  'sindrets/diffview.nvim', -- View diffs in Neovim and manage them with ease
+  'tpope/vim-fugitive', -- Git commands in Neovim
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
