@@ -172,6 +172,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+vim.keymap.set('n', '<leader>lg', ':!tmux new-window -c ' .. vim.fn.getcwd() .. ' -- lazygit <CR><CR>', { silent = true })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -1025,26 +1027,26 @@ require('lazy').setup({
   -- you can continue same window with `<space>sr` which resumes last telescope search
   --
   --
-  {
-    'kdheepak/lazygit.nvim',
-    lazy = true,
-    cmd = {
-      'LazyGit',
-      'LazyGitConfig',
-      'LazyGitCurrentFile',
-      'LazyGitFilter',
-      'LazyGitFilterCurrentFile',
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
-    },
-  },
+  -- {
+  --   'kdheepak/lazygit.nvim',
+  --   lazy = true,
+  --   cmd = {
+  --     'LazyGit',
+  --     'LazyGitConfig',
+  --     'LazyGitCurrentFile',
+  --     'LazyGitFilter',
+  --     'LazyGitFilterCurrentFile',
+  --   },
+  --   -- optional for floating window border decoration
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --   },
+  --   -- setting the keybinding for LazyGit with 'keys' is recommended in
+  --   -- order to load the plugin when the command is run for the first time
+  --   keys = {
+  --     { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+  --   },
+  -- },
   'almo7aya/openingh.nvim',
   {
     'kylechui/nvim-surround',
@@ -1089,6 +1091,13 @@ require('lazy').setup({
     keys = {
       { '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil' },
     },
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesitter-context').setup()
+    end,
   },
 }, {
   ui = {
