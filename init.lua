@@ -135,7 +135,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -204,7 +204,7 @@ end)
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 --
-
+--
 -- comment with <leader>c (uses built-in commenting feature)
 vim.api.nvim_set_keymap('n', '<leader>c', 'gc', { noremap = false })
 vim.api.nvim_set_keymap('x', '<leader>c', 'gc', { noremap = false })
