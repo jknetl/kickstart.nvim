@@ -738,6 +738,7 @@ require('lazy').setup({
         'tflint', -- Used for Terraform linting
         'helm-ls', -- Used for Helm LSP
         'gopls', -- Used for Go LSP
+        'bash-language-server', -- Used for bash scripts
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
