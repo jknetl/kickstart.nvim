@@ -174,6 +174,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 vim.keymap.set('n', '<leader>lg', ':!tmux new-window -c ' .. vim.fn.getcwd() .. ' -- lazygit <CR><CR>', { silent = true })
 
+vim.keymap.set('n', '<leader>g', ':Git<CR><CR>', { silent = true })
+vim.keymap.set('n', '<leader>gw', ':Gwrite<CR><CR>', { silent = true })
+vim.keymap.set('n', '<leader>gc', ':Git commit<CR><CR>', { silent = true })
+vim.keymap.set('n', '<leader>gp', ':Git push<CR><CR>', { silent = true })
+vim.keymap.set('n', '<leader>gP', ':Git push --force<CR><CR>', { silent = true })
+vim.keymap.set('n', '<leader>gu', ':Git pull<CR><CR>', { silent = true })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
