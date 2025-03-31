@@ -135,7 +135,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 400
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -172,15 +172,20 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<leader>lg', ':!tmux new-window -c ' .. vim.fn.getcwd() .. ' -- lazygit <CR><CR>', { silent = true })
+vim.keymap.set('n', '<leader>lg', function()
+  vim.fn.system('tmux display-popup -h 90% -w 90% -d ' .. vim.fn.getcwd() .. ' -E  lazygit')
+end, { silent = true, desc = 'open [l]azy[g]it' })
 
-vim.keymap.set('n', '<leader>g', ':Git<CR><CR>', { silent = true, desc = '[g]it - fugitive' })
+vim.keymap.set('n', '<leader>gg', ':Git<CR><CR>', { silent = true, desc = '[g]it - fu[g]itive' })
 vim.keymap.set('n', '<leader>gw', ':Gwrite<CR><CR>', { silent = true, desc = '[g]it [w]rite' })
 vim.keymap.set('n', '<leader>gc', ':Git commit<CR><CR>', { silent = true, desc = '[g]it [c]ommit' })
+vim.keymap.set('n', '<leader>ga', ':Git commit --amend<CR><CR>', { silent = true, desc = '[g]it commit [a]mend' })
 vim.keymap.set('n', '<leader>gp', ':Git push<CR><CR>', { silent = true, desc = '[g]it [p]ush' })
 vim.keymap.set('n', '<leader>gP', ':Git push --force<CR><CR>', { silent = true, desc = '[g]it [P]ush --force' })
 vim.keymap.set('n', '<leader>gu', ':Git pull<CR><CR>', { silent = true, desc = '[g]it [u]pdate (pull)' })
 
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
+vim.keymap.set('n', '<leader>wq', ':wq<CR>', { desc = 'Save file' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -416,17 +421,6 @@ require('lazy').setup({
       },
     },
     config = function()
-      -- Telescope is a fuzzy finder that comes with a lot of different things that
-      -- it can fuzzy find! It's more than just a "file finder", it can search
-      -- many different aspects of Neovim, your workspace, LSP, and more!
-      --
-      -- The easiest way to use Telescope, is to start by doing something like:
-      --  :Telescope help_tags
-      --
-      -- After running this command, a window will open up and you're able to
-      -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
-      --
       -- Two important keymaps to use while in Telescope are:
       --  - Insert mode: <c-/>
       --  - Normal mode: ?
@@ -443,12 +437,14 @@ require('lazy').setup({
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-Down>'] = require('telescope.actions').cycle_history_next,
+              ['<C-Up>'] = require('telescope.actions').cycle_history_prev,
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
