@@ -186,6 +186,7 @@ vim.keymap.set('n', '<leader>gu', ':Git pull<CR><CR>', { silent = true, desc = '
 
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>wq', ':wq<CR>', { desc = 'Save file' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -513,6 +514,10 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+  {
+    'nvim-telescope/telescope-smart-history.nvim',
+  },
+  { 'kkharji/sqlite.lua' },
 
   -- LSP Plugins
   {
@@ -1008,7 +1013,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -1043,6 +1048,31 @@ require('lazy').setup({
   --     { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
   --   },
   -- },
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      return require('nvim-tree').setup {
+        view = {
+          width = {
+            min = 20,
+            max = 50,
+          },
+          adaptive_size = true,
+        },
+        update_focused_file = {
+          enable = true,
+          update_root = {
+            enable = false,
+            ignore_list = {},
+          },
+          exclude = false,
+        },
+      }
+    end,
+    keys = {
+      { '\\', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle NvimTree' },
+    },
+  },
   'almo7aya/openingh.nvim',
   'github/copilot.vim',
   {
@@ -1083,6 +1113,13 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('treesitter-context').setup()
+    end,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup()
     end,
   },
 }, {
