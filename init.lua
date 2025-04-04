@@ -446,7 +446,20 @@ require('lazy').setup({
             },
           },
         },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            -- `hidden = true` will show hidden files in the file picker
+            hidden = true,
+            -- `no_ignore = true` will show files ignored by git in the file picker
+            no_ignore = true,
+          },
+          live_grep = {
+            -- `additional_args` is a function that returns a table of arguments to pass to the command
+            additional_args = function()
+              return { '--hidden' }
+            end,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
