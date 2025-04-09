@@ -760,6 +760,7 @@ require('lazy').setup({
         'helm-ls', -- Used for Helm LSP
         'gopls', -- Used for Go LSP
         'bash-language-server', -- Used for bash scripts
+        'pyright', -- Used for python (there is huge amoung of other python LSPs, picked pyright after very brief searching)
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1133,6 +1134,14 @@ require('lazy').setup({
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup()
+    end,
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup {}
     end,
   },
 }, {
