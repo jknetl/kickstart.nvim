@@ -445,18 +445,24 @@ require('lazy').setup({
               ['<C-Up>'] = require('telescope.actions').cycle_history_prev,
             },
           },
+          file_ignore_patterns = {
+            'node_modules',
+            '.git/',
+            '.terraform/',
+            '.venv/',
+          },
         },
         pickers = {
           find_files = {
             -- `hidden = true` will show hidden files in the file picker
             hidden = true,
             -- `no_ignore = true` will show files ignored by git in the file picker
-            no_ignore = true,
+            no_ignore = false,
           },
           live_grep = {
             -- `additional_args` is a function that returns a table of arguments to pass to the command
             additional_args = function()
-              return { '--hidden' }
+              return { '--hidden', '--no-ignore-vcs' }
             end,
           },
         },
