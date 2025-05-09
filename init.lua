@@ -1150,6 +1150,17 @@ require('lazy').setup({
       require('bufferline').setup {}
     end,
   },
+  -- For `plugins/markview.lua` users.
+  {
+    'OXY2DEV/markview.nvim',
+    lazy = false,
+
+    -- For blink.cmp's completion
+    -- source
+    -- dependencies = {
+    --     "saghen/blink.cmp"
+    -- },
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
