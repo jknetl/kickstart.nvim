@@ -187,6 +187,17 @@ vim.keymap.set('n', '<leader>gu', ':Git pull<CR><CR>', { silent = true, desc = '
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>wq', ':wq<CR>', { desc = 'Save file' })
 
+vim.keymap.set('n', '<leader>dm', ':DiffviewOpen main...<CR><CR>', { silent = true, desc = '[D]iffview[O]pen [m]ain...' })
+vim.keymap.set('n', '<leader>df', ':DiffviewFileHistory<CR><CR>', { silent = true, desc = '[D]iffview[F]ileHistory' })
+vim.keymap.set('n', '<leader>dc', ':DiffviewClose<CR><CR>', { silent = true, desc = '[D]iffview[C]close' })
+vim.keymap.set('n', '<leader>dr', ':DiffviewRefresh<CR><CR>', { silent = true, desc = '[D]iffview[R]efresh' })
+
+-- github
+vim.keymap.set('n', '<leader>gho', ':!gh --branch (git branch --show-current) browse %<CR>', { noremap = true, silent = true, desc = '[g]it[h]ub [o]pen' })
+vim.keymap.set('n', '<leader>ghp', ':!gh pr create --web <CR>', { noremap = true, silent = true, desc = '[g]it[h]ub open [p]r' })
+
+-- vim.api.nvim_create_user_command('dvo', 'DiffviewOpen', opts)
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -779,6 +790,7 @@ require('lazy').setup({
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+            require('lspconfig').nushell.setup {}
           end,
         },
       }
@@ -1142,14 +1154,19 @@ require('lazy').setup({
       require('lualine').setup()
     end,
   },
-  {
-    'akinsho/bufferline.nvim',
-    version = '*',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('bufferline').setup {}
-    end,
-  },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   version = '*',
+  --   dependencies = 'nvim-tree/nvim-web-devicons',
+  --   config = function()
+  --     require('bufferline').setup {
+  --       options = {
+  --         mode = 'buffers',
+  --         always_show_bufferline = true,
+  --       },
+  --     }
+  --   end,
+  -- },
   -- For `plugins/markview.lua` users.
   {
     'OXY2DEV/markview.nvim',
@@ -1158,8 +1175,18 @@ require('lazy').setup({
     -- For blink.cmp's completion
     -- source
     -- dependencies = {
-    --     "saghen/blink.cmp"
+    --     ""
     -- },
+  },
+  {
+    'cuducos/yaml.nvim',
+    ft = { 'yaml' }, -- optional
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'folke/snacks.nvim', -- optional
+      'nvim-telescope/telescope.nvim', -- optional
+      'ibhagwan/fzf-lua', -- optional
+    },
   },
 }, {
   ui = {
