@@ -998,10 +998,10 @@ require('lazy').setup({
       -- end)
 
       -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set('n', '<C-S-P>', function()
+      vim.keymap.set('n', '<C-P>', function()
         harpoon:list():prev()
       end)
-      vim.keymap.set('n', '<C-S-N>', function()
+      vim.keymap.set('n', '<C-N>', function()
         harpoon:list():next()
       end)
 
